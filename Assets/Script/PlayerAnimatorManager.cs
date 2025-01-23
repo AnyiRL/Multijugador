@@ -5,8 +5,15 @@ namespace Com.MyCompany.MyGame
 {
     public class PlayerAnimatorManager : MonoBehaviour
     {
+        #region Private Fields
+
+        [SerializeField]
+        private float directionDampTime = 0.25f;
         private Animator animator;
-        #region MonoBehaviour Callbacks
+
+        #endregion
+
+        #region MonoBehaviour CallBacks
 
         // Use this for initialization
         void Start()
@@ -16,6 +23,7 @@ namespace Com.MyCompany.MyGame
             {
                 Debug.LogError("PlayerAnimatorManager is Missing Animator Component", this);
             }
+
         }
 
         // Update is called once per frame
@@ -25,7 +33,6 @@ namespace Com.MyCompany.MyGame
             {
                 return;
             }
-
             // deal with Jumping
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             // only allow jumping if we are running.
@@ -37,24 +44,15 @@ namespace Com.MyCompany.MyGame
                     animator.SetTrigger("Jump");
                 }
             }
-
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
             if (v < 0)
             {
                 v = 0;
             }
-
             animator.SetFloat("Speed", h * h + v * v);
             animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
         }
-
-        #endregion
-
-        #region Private Fields
-
-        [SerializeField]
-        private float directionDampTime = 0.25f;
 
         #endregion
     }
