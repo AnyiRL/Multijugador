@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using Photon.Pun;
 
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Com.MyCompany.MyGame
 {
@@ -13,119 +14,89 @@ namespace Com.MyCompany.MyGame
     /// </summary>
     public class PlayerManager : MonoBehaviourPunCallbacks
     {
-        #region Private Fields
+        public float walkingSpeed, runningSpeed, acceleration, mouseSens, gravityScale, jumpForce;
 
-        [Tooltip("The Beams GameObject to control")]
-        [SerializeField]
-        private GameObject beams;
-        //True, when the user is firing
-        bool IsFiring;
-        
-        [Tooltip("The current Health of our player")]
-        public float Health = 1f;
-        #endregion
+        private float yVelocity = 0, currentSpeed;
+        private CharacterController characterController;
+        private Vector3 movementVector;
 
-        #region MonoBehaviour CallBacks
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
-        /// </summary>
-        void Awake()
+        // Start is called before the first frame update
+        void Start()
         {
-            if (beams == null)
-            {
-                Debug.LogError("<Color=Red><a>Missing</a></Color> Beams Reference.", this);
-            }
-            else
-            {
-                beams.SetActive(false);
-            }
+            characterController = GetComponent<CharacterController>();
+            gravityScale = Mathf.Abs(gravityScale);
         }
 
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity on every frame.
-        /// </summary>
+        // Update is called once per frame
         void Update()
         {
 
-            ProcessInputs();
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            bool shiftPressed = Input.GetKey(KeyCode.LeftShift);
+            float mouseX = Input.GetAxis("Mouse X");
+            bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
 
-            // trigger Beams active state
-            if (beams != null && IsFiring != beams.activeInHierarchy)
-            {
-                beams.SetActive(IsFiring);
-            }
-            
-            if (photonView.IsMine)
-            {
-                ProcessInputs();
-                if (Health <= 0f)
-                {
-                    GameManager.Instance.LeaveRoom();
-                }
-            }
+            Jump(jumpPressed);
+            Movement(x, z, shiftPressed);
+            RotatePlayer(mouseX);
         }
-        void OnTriggerEnter(Collider other)
+
+        void Jump(bool jumpPressed)
         {
-            if (!photonView.IsMine)
+            if (jumpPressed && characterController.isGrounded)
             {
-                return;
+                yVelocity = 0;
+                yVelocity += Mathf.Sqrt(jumpForce * 3 * gravityScale);   //raiz cuadrada
             }
-            // We are only interested in Beamers
-            // we should be using tags but for the sake of distribution, let's simply check by name.
-            if (!other.name.Contains("Beam"))
-            {
-                return;
-            }
-            Health -= 0.1f;
         }
-        /// <summary>
-        /// MonoBehaviour method called once per frame for every Collider 'other' that is touching the trigger.
-        /// We're going to affect health while the beams are touching the player
-        /// </summary>
-        /// <param name="other">Other.</param>
-        void OnTriggerStay(Collider other)
+
+        void Movement(float x, float z, bool shiftPressed)
         {
-            // we dont' do anything if we are not the local player.
-            if (!photonView.IsMine)
+            //if (shiftPressed)
+            //    currentSpeed = runningSpeed;
+            //else
+            //    currentSpeed = walkingSpeed;
+            if (shiftPressed && (x != 0 || z != 0))
             {
-                return;
+                currentSpeed = Mathf.Lerp(currentSpeed, runningSpeed, acceleration * Time.deltaTime);
             }
-            // We are only interested in Beamers
-            // we should be using tags but for the sake of distribution, let's simply check by name.
-            if (!other.name.Contains("Beam"))
+            else if (x != 0 || z != 0)
             {
-                return;
+                currentSpeed = Mathf.Lerp(currentSpeed, walkingSpeed, acceleration * Time.deltaTime);
             }
-            // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
-            Health -= 0.1f * Time.deltaTime;
+            else
+            {
+                currentSpeed = Mathf.Lerp(currentSpeed, 0, acceleration * Time.deltaTime);
+
+            }
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                SceneManager.LoadScene("Menu");
+            }
+
+            movementVector = transform.forward * currentSpeed * z + transform.right * currentSpeed * x;
+
+            if (!characterController.isGrounded)
+            {
+                yVelocity -= gravityScale;
+            }
+            movementVector.y = yVelocity;
+
+            movementVector *= Time.deltaTime;           //mV = mV * Dt  para que se mueva igual en todos los ordenadores
+
+            characterController.Move(movementVector);
         }
 
-        #endregion
 
-        #region Custom
-
-        /// <summary>
-        /// Processes the inputs. Maintain a flag representing when the user is pressing Fire.
-        /// </summary>
-        void ProcessInputs()
+        void RotatePlayer(float mouseX)
         {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                if (!IsFiring)
-                {
-                    IsFiring = true;
-                }
-            }
-            if (Input.GetButtonUp("Fire1"))
-            {
-                if (IsFiring)
-                {
-                    IsFiring = false;
-                }
-            }
+            Vector3 rotation = new Vector3(0, mouseX, 0) * mouseSens * Time.deltaTime;     //new Vector3(0, 5, 0) * Time.deltaTime  rotación c
+            transform.Rotate(rotation); // rota a la direccion que se indica
         }
-
-        #endregion
+        public float GetCurrentSpeed()
+        {
+            return currentSpeed;
+        }
     }
 }
