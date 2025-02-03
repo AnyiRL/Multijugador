@@ -20,7 +20,7 @@ namespace Com.MyCompany.MyGame
         }
         private void LateUpdate()
         {
-            animator.SetFloat("Speed", playerManager.GetCurrentSpeed() / playerManager.runningSpeed);  //devuelve la longitud del vector
+            animator.SetFloat("Blend", playerManager.GetCurrentSpeed() / playerManager.runningSpeed);  //devuelve la longitud del vector
         }
     }
 }
