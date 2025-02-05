@@ -556,6 +556,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 12.891346
       objectReference: {fileID: 0}
+    - target: {fileID: 663414872114822684, guid: 0d19523bbcbefb44584f7992b754ebc3, type: 3}
+      propertyPath: bulletPool
+      value: 
+      objectReference: {fileID: 8844903378258221525, guid: 2b28b8a07fb448741a8ceec210d25532, type: 3}
     - target: {fileID: 874919772910268503, guid: 0d19523bbcbefb44584f7992b754ebc3, type: 3}
       propertyPath: m_Name
       value: Robot
