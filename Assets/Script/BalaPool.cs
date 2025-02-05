@@ -1,3 +1,4 @@
+using Com.MyCompany.MyGame;
 using Photon.Pun.Demo.Asteroids;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,20 +6,13 @@ using UnityEngine;
 
 public class BalaPool : MonoBehaviour
 {
-    public GameObjectPool bulletPool;
-    // Start is called before the first frame update
-    void Start()
+    public GameObjectPool balaPool;
+    
+    public void Shoot()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        GameObject obj = balaPool.GimmeInactiveGameObject();
         if (Input.GetButtonDown("Fire1"))
         {
-            GameObject obj = bulletPool.GimmeInactiveGameObject();
-
             if (obj)
             {
                 obj.SetActive(true); // ya no esta disponible en la pool
@@ -27,4 +21,5 @@ public class BalaPool : MonoBehaviour
             }
         }
     }
+    
 }
