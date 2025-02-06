@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Pun;
 
 namespace Com.MyCompany.MyGame
 {
-    public class PlayerAnimatorManager : MonoBehaviour
+    public class PlayerAnimatorManager : MonoBehaviourPun
     {
         private Animator animator;
         private PlayerManager playerManager;
@@ -17,14 +18,16 @@ namespace Com.MyCompany.MyGame
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                animator.SetBool("shooting", true);
-            }
-            else
-            {
-                animator.SetBool("shooting", false);
-            }
+            //if (!photonView.IsMine)
+            //    return;
+            //if (Input.GetKeyDown(KeyCode.F))
+            //{
+            //    animator.SetBool("shooting", true);
+            //}
+            //else
+            //{
+            //    animator.SetBool("shooting", false);
+            //}
         }
         private void LateUpdate()
         {
