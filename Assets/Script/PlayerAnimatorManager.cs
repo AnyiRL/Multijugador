@@ -7,12 +7,11 @@ namespace Com.MyCompany.MyGame
     {
         private Animator animator;
         private PlayerManager playerManager;
-        private BalaPool bPool;
+        
         void Start()
         {
             animator = GetComponent<Animator>();
             playerManager = GetComponent<PlayerManager>();
-            bPool = GetComponent<BalaPool>();
         }
 
         // Update is called once per frame

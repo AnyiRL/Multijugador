@@ -496,7 +496,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2a3dce7c0be53d84ab97b409feeb84e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1242,10 +1242,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2730312793905701758, guid: e78d3a5d71d93c54ca854bc3ce5b32d8, type: 3}
-      propertyPath: playerPrefab
-      value: 
-      objectReference: {fileID: 2930997232895556723, guid: 278683f55a4de704b922c88685b1f96f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1336,7 +1332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2997713576751505642, guid: 1bce2f3c6c6f70341853e2e996595b47, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 120
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 2997713576751505642, guid: 1bce2f3c6c6f70341853e2e996595b47, type: 3}
       propertyPath: m_AnchoredPosition.y
