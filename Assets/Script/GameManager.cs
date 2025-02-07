@@ -9,13 +9,14 @@ using Photon.Realtime;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.TextCore.Text;
+using Photon.Pun.Demo.SlotRacer.Utils;
 
 namespace Com.MyCompany.MyGame
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
         public static GameManager Instance;
-
+        private int lifes = 100;
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
 
@@ -35,8 +36,6 @@ namespace Com.MyCompany.MyGame
         void Start()
         {
             Instance = this;
-
-
 
             if (PlayerManager.LocalPlayerInstance == null)
             {
@@ -63,6 +62,23 @@ namespace Com.MyCompany.MyGame
         {
             PhotonNetwork.LeaveRoom();
         }
+        //public int GetLifes()
+        //{
+        //    return lifes;
+        //}
+        //public void AddLifes(int lifeA)
+        //{
+        //    lifes += lifeA;
+        //}
+        //public void QuitLifes(int valor)
+        //{
+        //    lifes -= valor;
+
+        //    if (lifes <= 0)
+        //    {
+        //        SceneManager.LoadScene("Menu");
+        //    }
+        //}
 
         #endregion
 

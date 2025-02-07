@@ -6,6 +6,8 @@ using Photon.Pun;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using Photon.Pun.Demo.PunBasics;
+using Microsoft.Unity.VisualStudio.Editor;
+using UnityEngine.UI;
 
 namespace Com.MyCompany.MyGame
 {
@@ -14,10 +16,14 @@ namespace Com.MyCompany.MyGame
         public float walkingSpeed, runningSpeed, acceleration, mouseSens, gravityScale, jumpForce;
         [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
         public static GameObject LocalPlayerInstance;
-
+        [Tooltip("The current Health of our player")]
+        public float health = 1f;
+        
+        public Slider vidaVisual;
         private float yVelocity = 0, currentSpeed;
         private CharacterController characterController;
         private Vector3 movementVector;
+        bool IsFiring;
 
         private void Awake()
         {
@@ -66,6 +72,17 @@ namespace Com.MyCompany.MyGame
                 return;
             }
 
+            if (photonView.IsMine)
+            {
+                //ProcessInputs();
+                HealthValue();
+                
+                if (health <= 0f)
+                {
+                    GameManager.Instance.LeaveRoom();
+                }
+            }
+
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             bool shiftPressed = Input.GetKey(KeyCode.LeftShift);
@@ -75,6 +92,10 @@ namespace Com.MyCompany.MyGame
             Jump(jumpPressed);
             Movement(x, z, shiftPressed);
             RotatePlayer(mouseX);
+        }
+        private void HealthValue()
+        {
+            vidaVisual.GetComponent<Slider>().value = health;
         }
 
         void Jump(bool jumpPressed)
@@ -123,7 +144,6 @@ namespace Com.MyCompany.MyGame
             characterController.Move(movementVector);
         }
 
-
         void RotatePlayer(float mouseX)
         {
             Vector3 rotation = new Vector3(0, mouseX, 0) * mouseSens * Time.deltaTime;     //new Vector3(0, 5, 0) * Time.deltaTime  rotación c
@@ -132,6 +152,55 @@ namespace Com.MyCompany.MyGame
         public float GetCurrentSpeed()
         {
             return currentSpeed;
+        }
+        void OnTriggerEnter(Collider collision)
+        {
+            
+            if (!photonView.IsMine)
+            {
+                return;
+            }
+
+            shoot PMComponent = collision.gameObject.GetComponent<shoot>();
+
+            if (PMComponent != null)
+            {
+                health -= 0.1f;
+            }
+            
+        }
+        //void OnTriggerStay(Collider other)
+        //{
+        //    // we dont' do anything if we are not the local player.
+        //    if (!photonView.IsMine)
+        //    {
+        //        return;
+        //    }
+        //    // We are only interested in Beamers
+        //    // we should be using tags but for the sake of distribution, let's simply check by name.
+        //    if (!other.name.Contains("Beam"))
+        //    {
+        //        return;
+        //    }
+        //    // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
+        //    health -= 0.1f * Time.deltaTime;
+        //}
+        void ProcessInputs()
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (!IsFiring)
+                {
+                    IsFiring = true;
+                }
+            }
+            if (Input.GetButtonUp("Fire1"))
+            {
+                if (IsFiring)
+                {
+                    IsFiring = false;
+                }
+            }
         }
 
 #if UNITY_5_4_OR_NEWER
