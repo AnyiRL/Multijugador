@@ -17,8 +17,7 @@ public class BalaPool : MonoBehaviour
                 obj.SetActive(true); // ya no esta disponible en la pool
                 Vector3 balapos = new Vector3(transform.position.x, transform.position.y * 10, transform.position.z);
                 obj.transform.position = balapos;
-
-                obj.GetComponent<Bala>().SetDirection(transform.forward);
+                //obj.GetComponent<Bala>().SetDirection(transform.forward);
             }
         }
     }

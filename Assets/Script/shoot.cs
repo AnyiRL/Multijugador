@@ -8,16 +8,20 @@ public class shoot : MonoBehaviourPun
 {
     public GameObject bulletprefab;
     private Animator animator;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();    
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        bulletprefab.GetComponent<Bala>().SetDirection(transform.forward);
+
         if (!photonView.IsMine)
             return;
         if (Input.GetKeyDown(KeyCode.F))
@@ -28,7 +32,6 @@ public class shoot : MonoBehaviourPun
         else
         {
             animator.SetBool("shooting", false);
-        }
-        
-    }
+        }      
+    }    
 }

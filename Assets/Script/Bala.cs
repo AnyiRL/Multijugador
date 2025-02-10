@@ -1,3 +1,4 @@
+using Com.MyCompany.MyGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,7 @@ public class Bala : MonoBehaviour
     private void FixedUpdate()
     {
         _rb.velocity = speed * _dir;
-
+        
     }
 
     public void SetDirection(Vector3 value)

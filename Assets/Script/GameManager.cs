@@ -16,10 +16,12 @@ namespace Com.MyCompany.MyGame
     public class GameManager : MonoBehaviourPunCallbacks
     {
         public static GameManager Instance;
-        private int lifes = 100;
+        
         [Tooltip("The prefab to use for representing the player")]
-        public GameObject playerPrefab;
+        public GameObject playerPrefabBala;
+        public GameObject playerPrefabBomba;
 
+        private GameObject playerPrefab;
         #region Photon Callbacks
 
         /// <summary>
@@ -35,10 +37,12 @@ namespace Com.MyCompany.MyGame
         #region Public Methods
         void Start()
         {
+            
             Instance = this;
-
+            
             if (PlayerManager.LocalPlayerInstance == null)
             {
+                SelectCharacter();
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 if (playerPrefab == null)
@@ -49,6 +53,7 @@ namespace Com.MyCompany.MyGame
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                    StartCoroutine(Wait());
                     PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
                 }
             }
@@ -62,23 +67,24 @@ namespace Com.MyCompany.MyGame
         {
             PhotonNetwork.LeaveRoom();
         }
-        //public int GetLifes()
-        //{
-        //    return lifes;
-        //}
-        //public void AddLifes(int lifeA)
-        //{
-        //    lifes += lifeA;
-        //}
-        //public void QuitLifes(int valor)
-        //{
-        //    lifes -= valor;
+        
+        IEnumerator Wait()
+        {
+            yield return new WaitForSeconds(0.05f);
+        }
 
-        //    if (lifes <= 0)
-        //    {
-        //        SceneManager.LoadScene("Menu");
-        //    }
-        //}
+        public void SelectCharacter()
+        {
+            TMP_Dropdown dropdown = FindObjectOfType<TMP_Dropdown>();
+            if (dropdown.value == 0)
+            {
+                playerPrefab = playerPrefabBala;
+            }
+            else if (dropdown.value == 1)
+            {
+                playerPrefab = playerPrefabBomba;
+            }
+        }
 
         #endregion
 

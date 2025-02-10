@@ -5,10 +5,11 @@ using UnityEngine;
 public class Bomba : MonoBehaviour
 {
     public float speed;
-    public float gravity = 9.8f;
+    public float gravityScale;
     public float force;
     public float maxTime;
 
+    private float yVelocity;
     private float currentTime;
     private Vector3 dir;
     private Rigidbody rb;
@@ -16,7 +17,7 @@ public class Bomba : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        gravityScale = Mathf.Abs(gravityScale);
     }
 
     // Update is called once per frame
@@ -32,6 +33,7 @@ public class Bomba : MonoBehaviour
     
     private void FixedUpdate()
     {
+        yVelocity += Mathf.Sqrt(force * 3 * gravityScale);
         rb.AddForce(Vector3.up * force);
         rb.useGravity = true;
         rb.velocity = speed * dir;
