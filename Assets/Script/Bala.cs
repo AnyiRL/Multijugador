@@ -24,13 +24,13 @@ public class Bala : MonoBehaviour
         if (currentTime > maxTime)
         {
             currentTime = 0;
-            gameObject.SetActive(false); // se "devuelve" a la pool 
+            //gameObject.SetActive(false); // se "devuelve" a la pool 
+            Destroy(gameObject);
         }
     }
     private void FixedUpdate()
     {
-        _rb.velocity = speed * _dir;
-        
+        _rb.velocity = speed * _dir;       
     }
 
     public void SetDirection(Vector3 value)

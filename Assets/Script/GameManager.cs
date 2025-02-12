@@ -21,6 +21,8 @@ namespace Com.MyCompany.MyGame
         public GameObject playerPrefabBala;
         public GameObject playerPrefabBomba;
 
+        public int characterSelection;
+
         private GameObject playerPrefab;
         #region Photon Callbacks
 
@@ -34,57 +36,29 @@ namespace Com.MyCompany.MyGame
 
         #endregion
 
-        #region Public Methods
-        void Start()
+        private void Awake()
         {
-            
-            Instance = this;
-            
-            if (PlayerManager.LocalPlayerInstance == null)
+            if(!Instance)
             {
-                SelectCharacter();
-                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
-                // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                if (playerPrefab == null)
-                {
-                    Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
-                }
-                else
-                {
-                    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
-                    // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    StartCoroutine(Wait());
-                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
-                }
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
-                Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+                Destroy(gameObject);
             }
-            
         }
+
+        #region Public Methods
+       
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
         }
         
-        IEnumerator Wait()
-        {
-            yield return new WaitForSeconds(0.05f);
-        }
+      
 
-        public void SelectCharacter()
-        {
-            TMP_Dropdown dropdown = FindObjectOfType<TMP_Dropdown>();
-            if (dropdown.value == 0)
-            {
-                playerPrefab = playerPrefabBala;
-            }
-            else if (dropdown.value == 1)
-            {
-                playerPrefab = playerPrefabBomba;
-            }
-        }
+        
 
         #endregion
 

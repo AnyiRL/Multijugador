@@ -20,12 +20,14 @@ public class shoot : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        bulletprefab.GetComponent<Bala>().SetDirection(transform.forward);
+         
+        
 
         if (!photonView.IsMine)
             return;
         if (Input.GetKeyDown(KeyCode.F))
         {
+            bulletprefab.GetComponent<Bala>().SetDirection(transform.forward);
             PhotonNetwork.Instantiate(bulletprefab.name, transform.position, Quaternion.identity);
             animator.SetBool("shooting", true);
         }

@@ -159,13 +159,12 @@ namespace Com.MyCompany.MyGame
                 return;
             }
 
-            shoot PMComponent = collision.gameObject.GetComponent<shoot>();
+            Bala PMComponent = collision.gameObject.GetComponent<Bala>();
 
             if (PMComponent != null)
             {
                 health -= 0.1f;
-            }
-            
+            }        
         }
               
 
