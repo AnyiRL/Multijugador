@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5653030639224062314}
   - component: {fileID: 7166045124716269612}
   - component: {fileID: 416718665460082793}
+  - component: {fileID: -1897794144857254103}
+  - component: {fileID: 6305353225871413063}
   m_Layer: 0
   m_Name: Bomba
   m_TagString: Untagged
@@ -93,7 +95,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9049660623037964250}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0be94fc9a9d66144cbf69913476fa967, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -116,7 +118,7 @@ Rigidbody:
   m_GameObject: {fileID: 9049660623037964250}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -146,8 +148,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fcd3280c3ebae4286b673b0e5ee237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  h: 1
-  gravity: -9.8
+  force: 2
   maxTime: 2
-  objTrans: {fileID: 8608215601877629140, guid: b3a78be9a24e01a46a5e3d750e9656cb, type: 3}
+--- !u!114 &-1897794144857254103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049660623037964250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 6305353225871413063}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &6305353225871413063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049660623037964250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

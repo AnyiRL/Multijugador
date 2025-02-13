@@ -10,13 +10,17 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.TextCore.Text;
 using Photon.Pun.Demo.SlotRacer.Utils;
+using UnityEngine.UI;
 
 namespace Com.MyCompany.MyGame
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
         public static GameManager Instance;
-        
+        string characterName;
+       
+        public TMP_InputField inputField;
+
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefabBala;
         public GameObject playerPrefabBomba;
@@ -55,10 +59,14 @@ namespace Com.MyCompany.MyGame
         {
             PhotonNetwork.LeaveRoom();
         }
-        
-      
-
-        
+        public string GetName()
+        {
+            return characterName;
+        }
+        public void SaveName(string name)
+        {
+            characterName = name;   
+        }
 
         #endregion
 

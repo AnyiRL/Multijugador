@@ -35,9 +35,5 @@ public class PlayerNameInputField : MonoBehaviour
             PhotonNetwork.NickName = playerName;
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 }

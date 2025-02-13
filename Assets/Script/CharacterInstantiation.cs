@@ -17,9 +17,7 @@ public class CharacterInstantiation : MonoBehaviour
             
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                StartCoroutine(Wait());
-
-            
+                StartCoroutine(Wait());     
         }
         else
         {
@@ -32,6 +30,6 @@ public class CharacterInstantiation : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         PhotonNetwork.Instantiate(GameManager.Instance.characterSelection == 0 ? GameManager.Instance.playerPrefabBala.name : GameManager.Instance.playerPrefabBomba.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
     }
-
+    
 
 }

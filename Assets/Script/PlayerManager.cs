@@ -6,7 +6,6 @@ using Photon.Pun;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using Photon.Pun.Demo.PunBasics;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine.UI;
 
 namespace Com.MyCompany.MyGame
@@ -159,14 +158,29 @@ namespace Com.MyCompany.MyGame
                 return;
             }
 
-            Bala PMComponent = collision.gameObject.GetComponent<Bala>();
+            Bala balaComponent = collision.gameObject.GetComponent<Bala>();
+ 
 
-            if (PMComponent != null)
+            if (balaComponent != null)
             {
                 health -= 0.1f;
             }        
         }
-              
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!photonView.IsMine)
+            {
+                return;
+            }
+    
+            Bomba bombaComponent = collision.gameObject.GetComponent<Bomba>();
+
+            if (bombaComponent)
+            {
+                health -= 0.1f;
+            }
+        }
+
 
 #if UNITY_5_4_OR_NEWER
         void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)

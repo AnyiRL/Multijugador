@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Bomba : MonoBehaviour
 {
-    public float speed;
-    public float gravityScale;
+   
     public float force;
     public float maxTime;
-
-    private float yVelocity;
+    
     private float currentTime;
     private Vector3 dir;
     private Rigidbody rb;
@@ -17,7 +15,7 @@ public class Bomba : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        gravityScale = Mathf.Abs(gravityScale);
+        
     }
 
     // Update is called once per frame
@@ -27,33 +25,20 @@ public class Bomba : MonoBehaviour
         if (currentTime > maxTime)
         {
             currentTime = 0;
-            gameObject.SetActive(false); // se "devuelve" a la pool 
+            Destroy(gameObject);
         }
     }
     
     private void FixedUpdate()
-    {
-        yVelocity += Mathf.Sqrt(force * 3 * gravityScale);
-        rb.AddForce(Vector3.up * force);
-        rb.useGravity = true;
-        rb.velocity = speed * dir;
-        //rb.velocity = CalcularVelocidadInicial();
+    {   
+        //rb.AddForce(Vector3.up * force* 5);
+        rb.AddForce(dir * force);
     }
     public void SetDirection(Vector3 value)
     {
         dir = value;
     }
-    //Vector3 CalcularVelocidadInicial()
-    //{
-    //    Vector3 desplazamientoP = objTrans.transform.position - transform.position;
 
-    //    float velocityX, velocityY, velocityZ;
-    //    velocityY = Mathf.Sqrt(-2 * gravity * h);
-    //    velocityX = desplazamientoP.x / ((velocityY / gravity) + Mathf.Sqrt(2 * desplazamientoP.y - h) / gravity);  //ecuacion
-    //    velocityZ = desplazamientoP.z / ((velocityY / gravity) + Mathf.Sqrt(2 * desplazamientoP.y - h) / gravity);
-
-    //    return new Vector3(velocityX, velocityY, velocityZ);
-    //}
     //private void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.green;

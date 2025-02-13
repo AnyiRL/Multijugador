@@ -30,7 +30,7 @@ public class Bala : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _rb.velocity = speed * _dir;       
+        _rb.velocity = speed * _dir;
     }
 
     public void SetDirection(Vector3 value)
