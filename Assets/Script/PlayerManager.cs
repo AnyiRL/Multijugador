@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Com.MyCompany.MyGame
 {
-    public class PlayerManager : MonoBehaviourPunCallbacks
+    public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         public float walkingSpeed, runningSpeed, acceleration, mouseSens, gravityScale, jumpForce;
         [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
@@ -22,8 +22,9 @@ namespace Com.MyCompany.MyGame
         private float yVelocity = 0, currentSpeed;
         private CharacterController characterController;
         private Vector3 movementVector;
-        
 
+
+        
         private void Awake()
         {
             // #Important
@@ -202,5 +203,25 @@ namespace Com.MyCompany.MyGame
                 transform.position = new Vector3(0f, 5f, 0f);
             }
         }
+
+        #region IPunObservable implementation
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                // We own this player: send the others our data
+
+                stream.SendNext(health);
+            }
+            else
+            {
+                // Network player, receive data
+
+                this.health = (float)stream.ReceiveNext();
+            }
+        }
+
+        #endregion
     }
 }
