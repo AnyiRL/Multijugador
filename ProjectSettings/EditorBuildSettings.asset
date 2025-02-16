@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Menu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Room for 1.unity
@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Room for 3.unity
     guid: 085aa3621d4a2584a917fb129f30e6b5
+  - enabled: 1
+    path: Assets/Scenes/DeadScene.unity
+    guid: a859ea0de61388f49a9474ac01cc3c13
+  - enabled: 1
+    path: Assets/Scenes/VictoryScene.unity
+    guid: 7ef24eaee2730bc4cb6f8f232641cbd9
   m_configObjects: {}

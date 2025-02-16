@@ -26,12 +26,12 @@ public class PlayerNameInputField : MonoBehaviour
 
     public  void SetPlayerName()
     {
-        TMP_InputField _inputField = GetComponent<TMP_InputField>();
-        string playerName = _inputField.text; // lo que ha introducido el usuario
+        TMP_InputField _InputField = GetComponent<TMP_InputField>();
+        string playerName = _InputField.text; // lo que ha introducido el usuariio
 
-        if (!string.IsNullOrEmpty(playerName))  // si no esta vacio se establece como nombre
+        if (!string.IsNullOrEmpty(playerName))
         {
-            PlayerPrefs.SetString(playerNameKey, playerName); 
+            PlayerPrefs.SetString(playerNameKey, playerName);
             PhotonNetwork.NickName = playerName;
         }
     }

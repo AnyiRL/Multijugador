@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 2
   maxTime: 2
+  explosion: {fileID: 3377781337466281105, guid: 58bed0d2c6e5a1246995f71396f927fb, type: 3}
 --- !u!114 &-1897794144857254103
 MonoBehaviour:
   m_ObjectHideFlags: 0

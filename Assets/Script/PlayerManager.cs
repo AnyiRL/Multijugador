@@ -1,12 +1,13 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
+//using UnityEngine.EventSystems;
 
 using Photon.Pun;
 
-using System.Collections;
+//using System.Collections;
 using UnityEngine.SceneManagement;
 using Photon.Pun.Demo.PunBasics;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 namespace Com.MyCompany.MyGame
 {
@@ -22,9 +23,9 @@ namespace Com.MyCompany.MyGame
         private float yVelocity = 0, currentSpeed;
         private CharacterController characterController;
         private Vector3 movementVector;
-
-
-        
+        private FixedJoystick _joystick;
+        private Animator _animator;
+        private Rigidbody rb;
         private void Awake()
         {
             // #Important
@@ -78,11 +79,12 @@ namespace Com.MyCompany.MyGame
                 HealthValue();
                 
                 if (health <= 0f)
-                {
-                    GameManager.Instance.LeaveRoom();
+                {    
+                    PhotonNetwork.LoadLevel("DeadScene");
+                    GameManager.Instance.LoadScene("DeadScene");
                 }
             }
-
+#if UNITY_EDITOR || UNITY_STANDARLONE //del procesador que se ejecuta antes de compilar   CONDITIONAL COMBINATION
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             bool shiftPressed = Input.GetKey(KeyCode.LeftShift);
@@ -92,9 +94,23 @@ namespace Com.MyCompany.MyGame
             Jump(jumpPressed);
             Movement(x, z, shiftPressed);
             RotatePlayer(mouseX);
+#endif
         }
-        
+#if  UNITY_ANDROID               
+        private void FixedUpdate()
+        {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            {
+                return;
+            }
 
+            rb.velocity = new Vector3(_joystick.Horizontal * currentSpeed, rb.velocity.y, _joystick.Vertical * currentSpeed);
+            if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
+            {
+                transform.rotation = Quaternion.LookRotation(rb.velocity);
+            }
+        }
+#endif
         void Jump(bool jumpPressed)
         {
             if (jumpPressed && characterController.isGrounded)
@@ -147,10 +163,11 @@ namespace Com.MyCompany.MyGame
         {
             return currentSpeed;
         }
-        private void HealthValue()
-        {
+        public void HealthValue()
+        {   
             vidaVisual.GetComponent<Slider>().value = health;
         }
+
         void OnTriggerEnter(Collider collision)
         {
             
@@ -175,8 +192,9 @@ namespace Com.MyCompany.MyGame
             }
     
             Bomba bombaComponent = collision.gameObject.GetComponent<Bomba>();
+            Explosion explosionComponent = collision.gameObject.GetComponent<Explosion>();
 
-            if (bombaComponent)
+            if (bombaComponent || explosionComponent )
             {
                 health -= 0.1f;
             }

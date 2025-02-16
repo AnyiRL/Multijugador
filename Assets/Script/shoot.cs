@@ -1,8 +1,8 @@
-using System.Collections;
+//using System.Collections;
 using Com.MyCompany.MyGame;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using UnityEngine;
-using Photon.Realtime;
+//using Photon.Realtime;
 using Photon.Pun;
 
 public class shoot : MonoBehaviourPun
@@ -40,7 +40,7 @@ public class shoot : MonoBehaviourPun
         if (GameManager.Instance.characterSelection == 0)
         {            
             GameObject b = PhotonNetwork.Instantiate(prefab.name, transform.position, Quaternion.identity);
-            Vector3 balapos = new Vector3(transform.position.x, transform.position.y * 3.5f, transform.position.z * 2.5f);
+            Vector3 balapos = new Vector3(transform.position.x, transform.position.y * 3.5f, transform.position.z );
             b.transform.position = balapos;
             b.GetComponent<Bala>().SetDirection(transform.forward);
         }
@@ -48,9 +48,9 @@ public class shoot : MonoBehaviourPun
         else if (GameManager.Instance.characterSelection == 1)
         {                      
             GameObject bom = PhotonNetwork.Instantiate(prefab.name,transform.position, Quaternion.identity);
-            Vector3 bompos = new Vector3(transform.position.x, transform.position.y * 3.5f, transform.position.z * 1);
+            Vector3 bompos = new Vector3(transform.position.x, transform.position.y * 3.5f, transform.position.z);
             bom.transform.position = bompos;
-            bom.GetComponent<Bomba>().SetDirection(transform.position);
+            //bom.GetComponent<Bomba>().SetDirection(transform.position);
         }
     }
 }

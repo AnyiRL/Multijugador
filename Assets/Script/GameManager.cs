@@ -28,6 +28,7 @@ namespace Com.MyCompany.MyGame
         public int characterSelection;
 
         private GameObject playerPrefab;
+        private int player;
         #region Photon Callbacks
 
         /// <summary>
@@ -54,14 +55,35 @@ namespace Com.MyCompany.MyGame
         }
 
         #region Public Methods
-       
+       //public int Player()
+       // {
+       //     return player ;
+       // }
+       // public void MenosPlayer(int playerA)
+       // {
+       //     player -= playerA;
+       //     if (photonView.IsMine && player == 1)
+       //     {
+       //         PhotonNetwork.LoadLevel("Victory");
+       //     }
+
+       // }
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
         }
-        public string GetName()
+        public void Victory()
         {
-            return characterName;
+            PhotonNetwork.LoadLevel("VictoryScene");
+        }
+        public void Dead()
+        {
+            PhotonNetwork.LoadLevel("DeadScene");
+
+        }
+        public void LoadScene(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);           
         }
         public void SaveName(string name)
         {

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Com.MyCompany.MyGame;
+using Photon.Pun;
 using UnityEngine;
 
 public class Bomba : MonoBehaviour
@@ -7,6 +9,7 @@ public class Bomba : MonoBehaviour
    
     public float force;
     public float maxTime;
+    public GameObject explosion;
     
     private float currentTime;
     private Vector3 dir;
@@ -25,34 +28,26 @@ public class Bomba : MonoBehaviour
         if (currentTime > maxTime)
         {
             currentTime = 0;
-            Destroy(gameObject);
+            Explode();
         }
     }
     
     private void FixedUpdate()
     {   
         //rb.AddForce(Vector3.up * force* 5);
-        rb.AddForce(dir * force);
+        rb.AddForce(dir.normalized * force);
     }
     public void SetDirection(Vector3 value)
     {
         dir = value;
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.green;
-    //    if (currentTime > 2)
-    //    {
-    //        currentTime = 0;
-    //        DrawLines();
-    //    }
-    //}
-    //void DrawLines()
-    //{
-    //    Vector3 desde, hacia;
-    //    desde = transform.position;
-    //    hacia = objTrans.transform.position;
-    //    Gizmos.DrawLine(desde,hacia);
-    //}
+    void Explode()
+    {
+        //Instanciar el efecto de explosi¨®n
+        if (explosion != null)
+        {
+            Instantiate(explosion, transform.position, transform.rotation);
+        }
+        PhotonNetwork.Destroy(gameObject);
+    }   
 }

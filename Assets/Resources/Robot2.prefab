@@ -1078,7 +1078,6 @@ GameObject:
   - component: {fileID: 1968669626634218581}
   - component: {fileID: 7160021290249701786}
   - component: {fileID: 98519176296525563}
-  - component: {fileID: -7073943700385445247}
   m_Layer: 0
   m_Name: Robot2
   m_TagString: Untagged
@@ -1202,6 +1201,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 1968669626634218581}
   - {fileID: 7160021290249701786}
+  - {fileID: 4758020801243800770}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1278,18 +1278,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 9049660623037964250, guid: e3cd28d67295d594b9461296f0eaba83, type: 3}
---- !u!114 &-7073943700385445247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3672575284233165043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbaff0fa8612e704b85d962cd27e7a59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4290188481077857666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2423,7 @@ GameObject:
   - component: {fileID: 7452947049631237819}
   - component: {fileID: 4465237227971447494}
   - component: {fileID: 5553077436890766470}
+  - component: {fileID: 1455160715941364538}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2558,6 +2547,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1455160715941364538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687375542344867662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5af29ffbcbeb0241858af0e0dd1b6ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7718101940166119721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2933,6 +2934,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4158672004587593123, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158672004587593123, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
+      propertyPath: ObservedComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: 4515010096568874}
     - target: {fileID: 4280903863558352344, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
       propertyPath: m_Name
       value: Slider
@@ -2950,6 +2959,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
+--- !u!114 &4515010096568874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1366699904144025292, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
+  m_PrefabInstance: {fileID: 1362185174324231398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2044724938864229319 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1046847552512870177, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
