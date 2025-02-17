@@ -1223,7 +1223,7 @@ MonoBehaviour:
   mouseSens: 100
   gravityScale: 1
   jumpForce: 20
-  health: 1
+  health: 5.22
   vidaVisual: {fileID: 2044724938864229319}
 --- !u!114 &1968669626634218581
 MonoBehaviour:
@@ -2854,6 +2854,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6920651886779471457}
     m_Modifications:
+    - target: {fileID: -2605602248467830720, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3214354610886152295, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2941,7 +2945,7 @@ PrefabInstance:
     - target: {fileID: 4158672004587593123, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
       propertyPath: ObservedComponents.Array.data[0]
       value: 
-      objectReference: {fileID: 4515010096568874}
+      objectReference: {fileID: 0}
     - target: {fileID: 4280903863558352344, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
       propertyPath: m_Name
       value: Slider
@@ -2959,17 +2963,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
---- !u!114 &4515010096568874 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1366699904144025292, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
-  m_PrefabInstance: {fileID: 1362185174324231398}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2044724938864229319 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1046847552512870177, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}

@@ -2942,10 +2942,6 @@ PrefabInstance:
       propertyPath: ObservedComponents.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4158672004587593123, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
-      propertyPath: ObservedComponents.Array.data[0]
-      value: 
-      objectReference: {fileID: 233002120617184571}
     - target: {fileID: 4280903863558352344, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
       propertyPath: m_Name
       value: Slider
@@ -2963,17 +2959,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
---- !u!114 &233002120617184571 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1366699904144025292, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}
-  m_PrefabInstance: {fileID: 1282598335120436215}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2255056767376960726 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1046847552512870177, guid: e8bbce2ab0ae71f4cbf6331883c2acf9, type: 3}

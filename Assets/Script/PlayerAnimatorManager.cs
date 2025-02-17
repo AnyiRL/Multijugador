@@ -4,7 +4,7 @@ using Photon.Pun;
 
 namespace Com.MyCompany.MyGame
 {
-    public class PlayerAnimatorManager : MonoBehaviourPun
+    public class PlayerAnimatorManager : MonoBehaviourPun //IPunObservable
     {
         private Animator animator;
         private PlayerManager playerManager;
@@ -31,9 +31,32 @@ namespace Com.MyCompany.MyGame
         }
         private void LateUpdate()
         {
+            if (!photonView.IsMine)
+            {
+                return;
+            }
+
             animator.SetFloat("Blend", playerManager.GetCurrentSpeed() / playerManager.runningSpeed);  //devuelve la longitud del vector
         }
+        //#region IPunObservable implementation
 
-       
+        //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        //{
+        //    if (stream.IsWriting)
+        //    {
+        //        // We own this player: send the others our data
+
+        //        stream.SendNext(animator);
+        //    }
+        //    else
+        //    {
+        //        // Network player, receive data
+
+        //        this.animator = (float)stream.ReceiveNext();
+        //    }
+        //}
+
+        //#endregion
+
     }
 }

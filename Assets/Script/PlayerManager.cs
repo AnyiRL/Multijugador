@@ -68,6 +68,7 @@ namespace Com.MyCompany.MyGame
         // Update is called once per frame
         void Update()
         {
+            HealthValue();
             if (!photonView.IsMine && PhotonNetwork.IsConnected)
             {
                 return;
@@ -76,15 +77,17 @@ namespace Com.MyCompany.MyGame
             if (photonView.IsMine)
             {
                 //ProcessInputs();
-                HealthValue();
+
                 
                 if (health <= 0f)
-                {    
+                {
+                    gameObject.SetActive(false);                   
                     PhotonNetwork.LoadLevel("DeadScene");
+                    //GameManager.Instance.LeaveRoom();
                     GameManager.Instance.LoadScene("DeadScene");
                 }
             }
-#if UNITY_EDITOR || UNITY_STANDARLONE //del procesador que se ejecuta antes de compilar   CONDITIONAL COMBINATION
+//#if UNITY_EDITOR || UNITY_STANDARLONE //del procesador que se ejecuta antes de compilar   CONDITIONAL COMBINATION
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             bool shiftPressed = Input.GetKey(KeyCode.LeftShift);
@@ -94,23 +97,22 @@ namespace Com.MyCompany.MyGame
             Jump(jumpPressed);
             Movement(x, z, shiftPressed);
             RotatePlayer(mouseX);
-#endif
         }
-#if  UNITY_ANDROID               
-        private void FixedUpdate()
-        {
-        if (!photonView.IsMine && PhotonNetwork.IsConnected)
-            {
-                return;
-            }
+        //#elif UNITY_ANDROID
+        //        private void FixedUpdate()
+        //        {
+        //        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        //            {
+        //                return;
+        //            }
 
-            rb.velocity = new Vector3(_joystick.Horizontal * currentSpeed, rb.velocity.y, _joystick.Vertical * currentSpeed);
-            if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
-            {
-                transform.rotation = Quaternion.LookRotation(rb.velocity);
-            }
-        }
-#endif
+        //            rb.velocity = new Vector3(_joystick.Horizontal * currentSpeed, rb.velocity.y, _joystick.Vertical * currentSpeed);
+        //            if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
+        //            {
+        //                transform.rotation = Quaternion.LookRotation(rb.velocity);
+        //            }
+        //        }
+        //#endif
         void Jump(bool jumpPressed)
         {
             if (jumpPressed && characterController.isGrounded)
